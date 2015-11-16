@@ -102,41 +102,32 @@ class ReportController extends Controller
             return view('report.sor_atlit',$data);
     
         }elseif ($pilih == "pelatih") {
-              $grupby = DB::table('serti_pelatih')
-                    ->join('pelatihs','pelatihs.id','=','serti_pelatih.id_pelatih')
-                         ->join('cabangs','cabangs.id_cabang','=','pelatihs.cabang')
-                    ->groupBy('id_pelatih')->paginate();
-            
-           
-      
-   
-            $pelatih_se = DB::table('serti_pelatih')
-                        ->join('pelatihs','pelatihs.id','=','serti_pelatih.id_pelatih')
-                         ->join('cabangs','cabangs.id_cabang','=','pelatihs.cabang')->get();
-            
-
-            $data['pelatih_se'] = $pelatih_se;
-            $data['grupby'] = $grupby;
-           
+            if ($cabang != "000") {
+              $pelatih_se = DB::table('pelatihs')
+                    ->join('cabangs','cabangs.id_cabang','=','pelatihs.cabang')
+                    ->where('id_cabang',$cabang);
+            }else{
+                $pelatih_se = DB::table('pelatihs')
+                    ->join('cabangs','cabangs.id_cabang','=','pelatihs.cabang');
+            }
+            $data['cab'] = $cabang;
+            $data['pelatih_se'] = $pelatih_se->get();
+            $data['cabang'] = DB::table('cabangs')->where('id_cabang',$cabang)->first();
             $data['no'] = 1;
             return view('report.sor_pelatih',$data);
      
         }elseif ($pilih == "wasit") {
-         $grupby = DB::table('serti_wasit')
-                    ->join('wasits','wasits.id','=','serti_wasit.id_wasit')
+          if ($cabang != "000") {
+         $wasit_se= DB::table('wasits')
                          ->join('cabangs','cabangs.id_cabang','=','wasits.cabang')
-                    ->groupBy('id_wasit')->paginate();
-            
-           
-      
-   
-            $wasit_se = DB::table('serti_wasit')
-                        ->join('wasits','wasits.id','=','serti_wasit.id_wasit')
-                         ->join('cabangs','cabangs.id_cabang','=','wasits.cabang')->get();
-            
-
-            $data['wasit_se'] = $wasit_se;
-            $data['grupby'] = $grupby;
+                    ->where('id_cabang',$cabang);
+            }else{ 
+             $wasit_se= DB::table('wasits')
+                         ->join('cabangs','cabangs.id_cabang','=','wasits.cabang');
+      }
+       $data['cab'] = $cabang;
+            $data['wasit_se'] = $wasit_se->get();
+            $data['cabang'] = DB::table('cabangs')->where('id_cabang',$cabang)->first();
         $data['no'] = 1;
         return view('report.sor_wasit',$data);
      

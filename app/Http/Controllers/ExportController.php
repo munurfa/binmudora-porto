@@ -41,10 +41,50 @@ ob_start();
   
 		})->export('xls');
          }elseif ($pilih == "pelatih") {
-              
+
+              if ($cabang != "000") {
+              $pelatih_se = DB::table('pelatihs')
+                    ->join('cabangs','cabangs.id_cabang','=','pelatihs.cabang')
+                    ->where('id_cabang',$cabang)->get();
+            }else{
+                $pelatih_se = DB::table('pelatihs')
+                    ->join('cabangs','cabangs.id_cabang','=','pelatihs.cabang')->get();
+            }
+            
+                     
+        $no = 1; 
+            
+        ob_end_clean();
+ob_start();        
+        Excel::create('Report Pelatih', function($excel) use($pelatih_se,$no)  {
+          $excel->sheet('New sheet', function($sheet)use($pelatih_se,$no)  {
+
+            $sheet->loadView('excel.pelatih')->with('pelatih_se',$pelatih_se)->with('no',$no);
+        });
+  
+    })->export('xls');
 
           }elseif ($pilih == "wasit") {
          
+               if ($cabang != "000") {
+         $wasit_se= DB::table('wasits')
+                         ->join('cabangs','cabangs.id_cabang','=','wasits.cabang')
+                    ->where('id_cabang',$cabang)->get();
+            }else{ 
+             $wasit_se= DB::table('wasits')
+                         ->join('cabangs','cabangs.id_cabang','=','wasits.cabang')->get();
+            }
+            $no = 1; 
+            
+                ob_end_clean();
+        ob_start();        
+                Excel::create('Report Wasit', function($excel) use($wasit_se,$no)  {
+                  $excel->sheet('New sheet', function($sheet)use($wasit_se,$no)  {
+
+                    $sheet->loadView('excel.wasit')->with('wasit_se',$wasit_se)->with('no',$no);
+                });
+          
+            })->export('xls');
 
           }
     }

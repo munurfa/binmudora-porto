@@ -78,7 +78,7 @@
 									@if($a->foto == "")
 										<img src="{{asset("images/no_user.jpg")}}">
 									@else
-										<img src="{{asset("foto/atlit/".$a->foto)}}" width="120px" height="160px">
+										<img src="{{asset("public/foto/atlit/".$a->foto)}}" width="120px" height="160px">
 									@endif
 									</td>
 									<td><a href="{{url("atlit/$a->id/edit")}}">{{$a->nama}}</a></td>
