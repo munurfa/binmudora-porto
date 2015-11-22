@@ -1,7 +1,12 @@
 @extends('report.index')
 @section('title','Report Sarana Olah Raga')
 @section('main')
-<h1 class="text-center">REPORT OLAH RAGA</h1>
+<div style="padding: 10px">
+<h3 class="text-center">REPORT OLAH RAGA</h3>
+<p class="text-right">    
+<a class="btn btn-danger btn-lg" href="{{url("report/sarana/sarpras_ors")}}" target="_blank">Export Excel</a> 
+</p>
+</div>
 		 <table class="table table-responsive table-hover table-bordered" border="1px">
   <thead>
               <tr class="warning">

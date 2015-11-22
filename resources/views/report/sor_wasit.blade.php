@@ -1,6 +1,7 @@
 @extends('report.index')
 @section('title','Report Wasit')
 @section('main')
+<div style="padding: 10px">
 <h3 class="text-center">REPORT WASIT</h3>
 @if($cab != "000")
     <h3>Cabang : {{$cabang->nama_cab}}</h3> 
@@ -15,6 +16,7 @@
 <a class="btn btn-danger btn-lg" href="{{url("report/olahraga/wasit/000")}}" target="_blank">Export Excel</a>
   @endif
 </p>
+</div>
 		 <table class="table table-responsive table-hover table-bordered" border="1px">
   <thead>
               <tr class="warning">

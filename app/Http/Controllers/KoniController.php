@@ -25,24 +25,24 @@ class KoniController extends Controller
     public function index(Request $r)
     {
        
-       $koni = DB::table('konis')->paginate(10);
+       $koni = DB::table('konis');
 
-        $data['koni'] = $koni;
-
+        $data['koni'] = $koni->paginate(10);
+        $data['koni_all'] = $koni;
         $data['keyword'] = $r->keyword;
         $data['no'] = 1;
        return view('koni.index',$data);
     }
-     public function cari(Request $r)
+     public function cari(Request $r,$cari)
     {
        
-       $koni = DB::table('konis')->where('konis.nama','like',"%".$r->keyword."%")->paginate(10);
+       $koni = DB::table('konis')->where('konis.nama','like',"%".$cari."%");
 
-       $data['koni'] = $koni;
-      
-        $data['keyword'] = $r->keyword;
+       $data['koni'] = $koni->paginate(10);
+      $data['koni_all'] = $koni;
+        $data['keyword'] = $cari;
         $data['no'] = 1;
-       return view('koni.index',$data);
+       return view('koni.cari',$data);
     }
     /**
      * Show the form for creating a new resource.

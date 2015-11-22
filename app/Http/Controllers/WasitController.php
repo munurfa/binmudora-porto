@@ -27,9 +27,10 @@ class WasitController extends Controller
        
        $wasit = DB::table('wasits')
                         ->join('cabangs','cabangs.id_cabang','=','wasits.cabang')
-                        ->join('jeniss','jeniss.id_jenis','=','wasits.jenis')->paginate(10);
+                        ->join('jeniss','jeniss.id_jenis','=','wasits.jenis');
 
-        $data['wasit'] = $wasit;
+        $data['wasit'] = $wasit->paginate(10);
+        $data['wasit_all'] = $wasit;
         $cabang = DB::table('cabangs')->lists('nama_cab','id_cabang');
         $data['cabang'] = $cabang;
 
@@ -38,37 +39,39 @@ class WasitController extends Controller
        return view('wasit.index',$data);
     }
 
-    public function cari(Request $r)
+    public function cari(Request $r,$cari)
     {
        
        $wasit = DB::table('wasits')
                         ->join('cabangs','cabangs.id_cabang','=','wasits.cabang')
                         ->join('jeniss','jeniss.id_jenis','=','wasits.jenis')
-                        ->where('wasits.nama','like',"%".$r->keyword."%")->paginate(10);
+                        ->where('wasits.nama','like',"%".$cari."%");
 
-       $data['wasit'] = $wasit;
+       $data['wasit'] = $wasit->paginate(10);
+       $data['wasit_all'] = $wasit;
       
         $cabang = DB::table('cabangs')->lists('nama_cab','id_cabang');
         $data['cabang'] = $cabang;
-        $data['keyword'] = $r->keyword;
+        $data['keyword'] = $cari;
         $data['no'] = 1;
-       return view('wasit.index',$data);
+       return view('wasit.cari',$data);
     }
-       public function sort(Request $r)
+       public function sort(Request $r,$sort)
     {
        
        $wasit = DB::table('wasits')
                         ->join('cabangs','cabangs.id_cabang','=','wasits.cabang')
                         ->join('jeniss','jeniss.id_jenis','=','wasits.jenis')
-                        ->where('wasits.cabang','=',$r->cabang)->paginate(10);
+                        ->where('wasits.cabang','=',$sort);
 
-       $data['wasit'] = $wasit;
-      
+       $data['wasit'] = $wasit->paginate(10);
+      $data['wasit_all'] = $wasit;
         $cabang = DB::table('cabangs')->lists('nama_cab','id_cabang');
         $data['cabang'] = $cabang;
+        $data['sort'] = $sort;
         $data['keyword'] = $r->keyword;
         $data['no'] = 1;
-       return view('wasit.index',$data);
+       return view('wasit.sort',$data);
     }
 
 

@@ -19,6 +19,8 @@
 		<script src="{{asset("js/jquery.min.js")}}"></script>
 		<script src="{{asset("js/jquery-ui.js")}}"></script>
 		<!--webfonts-->
+
+    	<link rel="shortcut icon" href="{{ asset('images/logo.png') }}">
 		<link href='//fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900' rel='stylesheet' type='text/css'>
 		<!--//webfonts-->
 		<!-- Nav CSS -->

@@ -28,9 +28,10 @@ class PelatihController extends Controller
        
        $pelatih = DB::table('pelatihs')
                         ->join('cabangs','cabangs.id_cabang','=','pelatihs.cabang')
-                        ->join('jeniss','jeniss.id_jenis','=','pelatihs.jenis')->paginate(10);
+                        ->join('jeniss','jeniss.id_jenis','=','pelatihs.jenis');
 
-        $data['pelatih'] = $pelatih;
+        $data['pelatih'] = $pelatih->paginate(10);
+        $data['pelatih_all'] = $pelatih;
         $cabang = DB::table('cabangs')->lists('nama_cab','id_cabang');
         $data['cabang'] = $cabang;
 
@@ -39,37 +40,39 @@ class PelatihController extends Controller
        return view('pelatih.index',$data);
     }
 
-    public function cari(Request $r)
+    public function cari(Request $r,$cari)
     {
        
        $pelatih = DB::table('pelatihs')
                         ->join('cabangs','cabangs.id_cabang','=','pelatihs.cabang')
                         ->join('jeniss','jeniss.id_jenis','=','pelatihs.jenis')
-                        ->where('pelatihs.nama','like',"%".$r->keyword."%")->paginate(10);
+                        ->where('pelatihs.nama','like',"%".$cari."%");
 
-       $data['pelatih'] = $pelatih;
-      
+       $data['pelatih'] = $pelatih->paginate(10);
+      $data['pelatih_all'] = $pelatih;
         $cabang = DB::table('cabangs')->lists('nama_cab','id_cabang');
         $data['cabang'] = $cabang;
-        $data['keyword'] = $r->keyword;
+        $data['keyword'] = $cari;
         $data['no'] = 1;
-       return view('pelatih.index',$data);
+       return view('pelatih.cari',$data);
     }
-       public function sort(Request $r)
+       public function sort(Request $r,$sort)
     {
        
        $pelatih = DB::table('pelatihs')
                         ->join('cabangs','cabangs.id_cabang','=','pelatihs.cabang')
                         ->join('jeniss','jeniss.id_jenis','=','pelatihs.jenis')
-                        ->where('pelatihs.cabang','=',$r->cabang)->paginate(10);
+                        ->where('pelatihs.cabang','=',$sort);
 
-       $data['pelatih'] = $pelatih;
+       $data['pelatih'] = $pelatih->paginate(10);
+       $data['pelatih_all'] = $pelatih;
       
         $cabang = DB::table('cabangs')->lists('nama_cab','id_cabang');
         $data['cabang'] = $cabang;
+        $data['sort'] = $sort;
         $data['keyword'] = $r->keyword;
         $data['no'] = 1;
-       return view('pelatih.index',$data);
+       return view('pelatih.sort',$data);
     }
 
     /**

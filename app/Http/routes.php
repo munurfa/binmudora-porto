@@ -1,9 +1,12 @@
 
 <?php
 
-
-Route::get('/', 'LogController@getLogin');
-Route::post('login', 'LogController@postLogin');
+Route::get('/', function ()
+{
+	return redirect()->intended('auth/login');
+});
+Route::get('auth/login', 'LogController@getLogin');
+Route::post('auth/login', 'LogController@postLogin');
 Route::get('auth/logout', 'LogController@postLogout');
 
 Route::get('dashboard', 'DashController@index');
@@ -22,8 +25,8 @@ Route::patch('atlit/event/{id}','AtlitController@eventUpdate');
 Route::delete('atlit/event/{id}','AtlitController@eventDelete');
 
 Route::resource('pelatih', 'PelatihController',['except'=>'show']);
-Route::post('pelatih/cari','PelatihController@cari');
-Route::post('pelatih/sortby','PelatihController@sort');
+Route::get('pelatih/cari/{cari}','PelatihController@cari');
+Route::get('pelatih/sortby/{sort}','PelatihController@sort');
 //event pelatih
 Route::get('pelatih/event/{id}','PelatihController@event');
 Route::get('pelatih/event/{id}/create','PelatihController@eventCreate');
@@ -48,8 +51,8 @@ Route::delete('pelatih/riwayat/{id}','PelatihController@riwayatDelete');
 
 
 Route::resource('wasit', 'WasitController',['except'=>'show']);
-Route::post('wasit/cari','WasitController@cari');
-Route::post('wasit/sortby','WasitController@sort');
+Route::get('wasit/cari/{cari}','WasitController@cari');
+Route::get('wasit/sortby/{sort}','WasitController@sort');
 //event wasit
 Route::get('wasit/event/{id}','WasitController@event');
 Route::get('wasit/event/{id}/create','WasitController@eventCreate');
@@ -66,7 +69,7 @@ Route::patch('wasit/serti/{id}','WasitController@sertiUpdate');
 Route::delete('wasit/serti/{id}','WasitController@sertiDelete');
 
 Route::resource('koni', 'KoniController',['except'=>'show']);
-Route::post('koni/cari','KoniController@cari');
+Route::get('koni/cari/{cari}','KoniController@cari');
 Route::get('koni/struktur/{id}','KoniController@struktur');
 Route::get('koni/struktur/{id}/create','KoniController@strukturCreate');
 Route::post('koni/struktur','KoniController@strukturStore');
@@ -96,9 +99,11 @@ Route::get('report/olahraga/{pilih}/{cabang}', 'ExportController@getOREx');
 
 Route::get('report/sarana', 'ReportController@setSarana');
 Route::post('report/sarana', 'ReportController@getSarana');
+Route::get('report/sarana/{pilih}', 'ExportController@getSaranaEx');
 
 Route::get('report/kepemudaan', 'ReportController@setMuda');
 Route::post('report/kepemudaan', 'ReportController@getMuda');
+Route::get('report/kepemudaan/{pilih}', 'ExportController@getMudaEx');
 
 Route::resource('okp', 'OkpController',['except'=>'show']);
 Route::get('okp/struktur/{id}','OkpController@struktur');

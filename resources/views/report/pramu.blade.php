@@ -1,26 +1,31 @@
 @extends('report.index')
 @section('title','Report Kepramukaan')
 @section('main')
-<h1 class="text-center">REPORT KEPRAMUKAAN</h1>
+<div style="padding: 10px">
+<h3 class="text-center">REPORT KEPRAMUKAAN</h3>
+<p class="text-right">    
+<a class="btn btn-danger btn-lg" href="{{url("report/kepemudaan/pra")}}" target="_blank">Export Excel</a> 
+</p>
+</div>
 		 <table class="table table-responsive table-hover table-bordered" border="1px">
 <thead>
               <tr class="warning">
                 <th width="10px">No</th>
-                <th>Nama</th>
-                <th >Alamat</th>
-                <th >Kab / Kota</th>
-                <th width="30px">Siaga L</th>
+                <th width="300px">Nama</th>
+                <th width="300px">Alamat</th>
+                <th width="150px">Kab / Kota</th>
+                <th >Siaga L</th>
 
-                <th width="30px">Siaga P</th>
+                <th >Siaga P</th>
 
-                <th width="30px">Penggalang L</th>
-                <th width="30px">Penggalang P</th>
-                <th width="30px">Penegak L</th>
-                <th width="30px">Penegak P</th>
-                <th width="30px">Pandega L</th>
-                <th width="30px">Pandega P</th>
-                <th width="30px">Luar Biasa L</th>
-                <th width="30px">Luar Biasa P</th>
+                <th >Penggalang L</th>
+                <th >Penggalang P</th>
+                <th >Penegak L</th>
+                <th >Penegak P</th>
+                <th >Pandega L</th>
+                <th >Pandega P</th>
+                <th >Luar Biasa L</th>
+                <th >Luar Biasa P</th>
               </tr>
             </thead>
             <tbody>

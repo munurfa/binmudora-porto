@@ -6,31 +6,32 @@
 	   <div class="xs">
   	 <h3>Data Wasit 
   	 <a href="{{url("wasit/create")}}" class="btn btn-danger">Tambah Data</a></h3>
-  	  {!!Form::open(['method'=>'get','url'=>'wasit/cari','id'=>'formcari'])!!}
+  	  {{--{!!Form::open(['method'=>'get','url'=>'wasit/cari','id'=>'formcari'])!!}
   	 	{!!Form::text('keyword', '', ['class'=>'form-control1','style'=>'margin-right:5px','placeholder'=>'Cari Berdasarkan Nama'])!!}
   	 {{-- 
-  	 	{!!Form::submit('Cari', ['class'=>'btn btn-danger'])!!} --}}
+  	 	{!!Form::submit('Cari', ['class'=>'btn btn-danger'])!!} 
 		
-  	 {!!Form::close()!!}
+  	 {!!Form::close()!!} --}}
   	 <div class="panel panel-warning" data-widget="{&quot;draggable&quot;: &quot;false&quot;}" data-widget-static="">
 
 				<div class="panel-body no-padding">
 				 {!!Form::open(['method'=>'get','url'=>'wasit/sortby/001','id'=>'formsort'])!!}
 				 <h5>Sort By Cabang</h5>
-  	 	{!!Form::select('cabang', $cabang, null, ['class' => 'form-control1 col-md-6','style'=>'width:40%;margin-right:5px','id'=>'cabang'])!!}
+  	 	{!!Form::select('cabang', $cabang, $sort, ['class' => 'form-control1 col-md-6','style'=>'width:40%;margin-right:5px','id'=>'cabang'])!!}
 		
   	 	{!!Form::submit('Kelompokkan', ['class'=>'btn btn-danger'])!!}
   	 {!!Form::close()!!}<br>
   	 <script>
   	 $(document).ready(function () {
+  	 	var action =  $("#cabang").val() ;
   	 	$("#cabang").change(function() {
 		  var action =  $("#cabang").val() ;
-		  $("#formsort").attr("action", "wasit/sortby/" + action);
+		  $("#formsort").attr("action",  action);
 		});
-		$("#cari").change(function() {
-		  var cari =  $("#cari").val() ;
-		  $("#formcari").attr("action", "wasits/cari/" + cari);
-		});
+		// $("#cari").change(function() {
+		//   var cari =  $("#cari").val() ;
+		//   $("#formcari").attr("action", "wasits/cari/" + cari);
+		// });
   	 });
   	 </script>
   	 	 <h5 style="color: black">

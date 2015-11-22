@@ -17,6 +17,7 @@ return array(
     'App\\Http\\Controllers\\Auth\\PasswordController' => $baseDir . '/app/Http/Controllers/Auth/PasswordController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Controllers\\DashController' => $baseDir . '/app/Http/Controllers/DashController.php',
+    'App\\Http\\Controllers\\ExportController' => $baseDir . '/app/Http/Controllers/ExportController.php',
     'App\\Http\\Controllers\\KnpiController' => $baseDir . '/app/Http/Controllers/KnpiController.php',
     'App\\Http\\Controllers\\KompetisiController' => $baseDir . '/app/Http/Controllers/KompetisiController.php',
     'App\\Http\\Controllers\\KoniController' => $baseDir . '/app/Http/Controllers/KoniController.php',

@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
+use Session;
 
 class Authenticate
 {
@@ -38,7 +39,8 @@ class Authenticate
             if ($request->ajax()) {
                 return response('Unauthorized.', 401);
             } else {
-                return redirect()->guest('auth/login');
+                $gagal = Session::flash('gagal', 'Invalid Username and Password');
+                return redirect()->guest('/')->with($gagal);
             }
         }
 

@@ -5,33 +5,34 @@
 	<div class="xs">
 		<h3>Data Pelatih 
 		<a href="{{url("pelatih/create")}}" class="btn btn-danger">Tambah Data</a></h3>
-		 {!!Form::open(['method'=>'get','url'=>'pelatih/cari','id'=>'formcari'])!!}
-  	 	{!!Form::text('keyword', '', ['class'=>'form-control1','style'=>'margin-right:5px','placeholder'=>'Cari Berdasarkan Nama','id'=>'cari'])!!}
+	{{-- 	 {!!Form::open(['url'=>'pelatih/cari','id'=>'formcari'])!!}
+  	 	{!!Form::text('keyword', '', ['class'=>'form-control1 col-md-5','style'=>'width:40%;margin-right:5px','placeholder'=>'Cari Berdasarkan Nama','id'=>'cari'])!!}
   	 
 		{{-- 
-  	 	{!!Form::submit('Cari', ['class'=>'btn btn-danger'])!!} --}}
-  	 {!!Form::close()!!}
+  	 	{!!Form::submit('Cari', ['class'=>'btn btn-danger'])!!} 
+  	 {!!Form::close()!!} --}}
 		
 		<div class="panel panel-warning" data-widget="{&quot;draggable&quot;: &quot;false&quot;}" data-widget-static="">
 			<div class="panel-body no-padding">
-			 {!!Form::open(['method'=>'get','url'=>'pelatih/sortby/001','id'=>'formsort'])!!}
+			 {!!Form::open(['method'=>'get','url'=>'001','id'=>'formsort'])!!}
 				 <h5>Sort By Cabang</h5>
-  	 	{!!Form::select('cabang', $cabang, null, ['class' => 'form-control1 col-md-6','style'=>'width:40%;margin-right:5px','id'=>'cabang'])!!}
+  	 	{!!Form::select('cabang', $cabang, $sort, ['class' => 'form-control1 col-md-6','style'=>'width:40%;margin-right:5px','id'=>'cabang'])!!}
 		
   	 	{!!Form::submit('Kelompokkan', ['class'=>'btn btn-danger'])!!}
   	 {!!Form::close()!!}<br>
   	 	 <script>
 
   	 $(document).ready(function () {
+  	 	var action =  $("#cabang").val() ;
   	 	$("#cabang").change(function() {
 		  var action =  $("#cabang").val() ;
-		  $("#formsort").attr("action", "pelatih/sortby/" + action);
+		  $("#formsort").attr("action",  action);
 		});
-		$("#cari").change(function() {
-		  var cari =  $("#cari").val() ;
-		  $("#formcari").attr("action", "pelatih/cari/" + cari);
-		});
-  	 });
+		// $("#cari").change(function() {
+		//   var cari =  $("#cari").val() ;
+		//   $("#formcari").attr("action", "pelatih/cari/" + cari);
+		// });
+  	 })
 		
 
 

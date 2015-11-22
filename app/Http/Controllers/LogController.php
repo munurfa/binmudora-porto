@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Auth;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Session;
 
 class LogController extends Controller
 {
@@ -26,12 +27,13 @@ class LogController extends Controller
             
               return redirect()->intended('dashboard');
        
-        }
-        return redirect()->intended('/');
+        } 
+        $gagal = Session::flash('gagal', 'Invalid Username and Password');
+        return redirect()->intended('auth/login')->with($gagal);
     }
     public function postLogout(Request $r)
     {
         Auth::logout();
-        return redirect()->intended('/');
+        return redirect()->intended('auth/login');
     }
 }

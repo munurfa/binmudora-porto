@@ -32,7 +32,7 @@ class ExportController extends Controller
         $no = 1; 
             
         ob_end_clean();
-ob_start();        
+        ob_start();        
         Excel::create('Report Atlit', function($excel) use($atlit_pres,$no)  {
         	$excel->sheet('New sheet', function($sheet)use($atlit_pres,$no)  {
 
@@ -87,6 +87,123 @@ ob_start();
             })->export('xls');
 
           }
+    }
+
+
+
+    public function getMudaEx($pilih)
+    {
+      if ($pilih == "okp") {
+        $okp = DB::table('okp')->get();
+        $no = 1;
+        ob_end_clean();
+        ob_start();        
+                Excel::create('Report OKP', function($excel) use($okp,$no)  {
+                  $excel->sheet('New sheet', function($sheet)use($okp,$no)  {
+
+                    $sheet->loadView('excel.okp')->with('okp',$okp)->with('no',$no);
+                });
+          
+            })->export('xls');
+      } elseif($pilih == "knpi"){
+        $knpi = DB::table('knpi')->get();
+        $no = 1;
+        ob_end_clean();
+        ob_start();        
+                Excel::create('Report KNPI', function($excel) use($knpi,$no)  {
+                  $excel->sheet('New sheet', function($sheet)use($knpi,$no)  {
+
+                    $sheet->loadView('excel.knpi')->with('knpi',$knpi)->with('no',$no);
+                });
+          
+        })->export('xls');
+      }elseif($pilih == "pra"){
+
+        $pra = DB::table('pramuka')->get();
+        $no = 1;
+        ob_end_clean();
+        ob_start();        
+                Excel::create('Report Kepramukaan', function($excel) use($pra,$no)  {
+                  $excel->sheet('New sheet', function($sheet)use($pra,$no)  {
+
+                    $sheet->loadView('excel.pra')->with('pra',$pra)->with('no',$no);
+                });
+          
+        })->export('xls');
+
+      }elseif($pilih == "sp"){
+
+        $sar = DB::table('sarjana')->get();
+        $no = 1;
+        ob_end_clean();
+        ob_start();        
+                Excel::create('Report Sarjana Penggerak', function($excel) use($sar,$no)  {
+                  $excel->sheet('New sheet', function($sheet)use($sar,$no)  {
+
+                    $sheet->loadView('excel.sarjana')->with('sar',$sar)->with('no',$no);
+                });
+          
+        })->export('xls');
+      }
+      
+    }
+
+    public function getSaranaEx($pilih)
+    {
+      if ($pilih == "sarpras_muda") {
+        $sarmud = DB::table('sarpras_muda')->get();
+        $no = 1;
+        ob_end_clean();
+        ob_start();        
+                Excel::create('Report Sarana Kepemudaan', function($excel) use($sarmud,$no)  {
+                  $excel->sheet('New sheet', function($sheet)use($sarmud,$no)  {
+
+                    $sheet->loadView('excel.sarmud')->with('sarmud',$sarmud)->with('no',$no);
+                });
+          
+            })->export('xls');
+      } elseif($pilih == "sarpras_ors"){
+        $sor = DB::table('sarpras_ors')->get();
+        $no = 1;
+        ob_end_clean();
+        ob_start();        
+                Excel::create('Report Sarana Keolahragaan', function($excel) use($sor,$no)  {
+                  $excel->sheet('New sheet', function($sheet)use($sor,$no)  {
+
+                    $sheet->loadView('excel.sor')->with('sor',$sor)->with('no',$no);
+                });
+          
+            })->export('xls');
+
+      }elseif($pilih == "sarpras_public"){
+        $sarpub = DB::table('sarpras_public')->get();
+        $no = 1;
+        ob_end_clean();
+        ob_start();        
+                Excel::create('Report Sarana Public', function($excel) use($sarpub,$no)  {
+                  $excel->sheet('New sheet', function($sheet)use($sarpub,$no)  {
+
+                    $sheet->loadView('excel.sarpub')->with('sarpub',$sarpub)->with('no',$no);
+                });
+          
+            })->export('xls');
+
+      }elseif($pilih == "sarpras_asset"){
+$saras = DB::table('sarpras_asset')->get();
+        $no = 1;
+        ob_end_clean();
+        ob_start();        
+                Excel::create('Report Sarana Asset', function($excel) use($saras,$no)  {
+                  $excel->sheet('New sheet', function($sheet)use($saras,$no)  {
+
+                    $sheet->loadView('excel.saras')->with('saras',$saras)->with('no',$no);
+                });
+          
+            })->export('xls');
+
+      }
+
+
     }
 
 }

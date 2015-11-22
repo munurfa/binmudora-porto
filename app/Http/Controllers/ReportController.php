@@ -148,6 +148,7 @@ class ReportController extends Controller
             // $pdf = PDF::loadView('report.okp',$data);
             // return $pdf->stream('okp.pdf');
         }elseif ($pilih == "knpi") {
+            
             $knpi = DB::table('knpi')->get();
 
             $data['knpi'] = $knpi;

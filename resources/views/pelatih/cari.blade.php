@@ -14,24 +14,24 @@
 		
 		<div class="panel panel-warning" data-widget="{&quot;draggable&quot;: &quot;false&quot;}" data-widget-static="">
 			<div class="panel-body no-padding">
-			 {!!Form::open(['method'=>'get','url'=>'pelatih/sortby/001','id'=>'formsort'])!!}
+			{{--  {!!Form::open(['url'=>'pelatih/sortby'm'id'=>'formsort'])!!}
 				 <h5>Sort By Cabang</h5>
   	 	{!!Form::select('cabang', $cabang, null, ['class' => 'form-control1 col-md-6','style'=>'width:40%;margin-right:5px','id'=>'cabang'])!!}
 		
   	 	{!!Form::submit('Kelompokkan', ['class'=>'btn btn-danger'])!!}
-  	 {!!Form::close()!!}<br>
+  	 {!!Form::close()!!}<br> --}}
   	 	 <script>
 
   	 $(document).ready(function () {
-  	 	$("#cabang").change(function() {
-		  var action =  $("#cabang").val() ;
-		  $("#formsort").attr("action", "pelatih/sortby/" + action);
-		});
+  // 	 	$("#cabang").change(function() {
+		//   var action =  $("#cabang").val() ;
+		//   $("#formsort").attr("action", "pelatih/sortby/" + action);
+		// });
 		$("#cari").change(function() {
 		  var cari =  $("#cari").val() ;
-		  $("#formcari").attr("action", "pelatih/cari/" + cari);
+		  $("#formcari").attr("action", cari);
 		});
-  	 });
+  	 })
 		
 
 

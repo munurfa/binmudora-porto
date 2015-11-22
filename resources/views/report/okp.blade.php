@@ -1,7 +1,12 @@
 @extends('report.index')
 @section('title','Report Organisasi Kepemudaan')
 @section('main')
-<h1 class="text-center">REPORT ORGANISASI KEPEMUDAAN</h1>
+<div style="padding: 10px">
+<h3 class="text-center">REPORT ORGANISASI KEPEMUDAAN</h3>
+<p class="text-right">    
+<a class="btn btn-danger btn-lg" href="{{url("report/kepemudaan/okp")}}" target="_blank">Export Excel</a> 
+</p>
+</div>
 		 <table class="table table-responsive table-hover table-bordered" border="1px">
 <thead>
               <tr class="warning">

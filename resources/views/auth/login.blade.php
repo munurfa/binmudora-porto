@@ -17,6 +17,7 @@
 
     <!-- Theme style -->
     <link rel="stylesheet" href="{{asset("css/login.css")}}">
+    <link rel="shortcut icon" href="{{ asset('images/logo.png') }}">
    
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -31,11 +32,25 @@
      
       <div class="login-box-body">
         <h2 class="text-center"><b>Binmudora Pemalang</b></h2>
+        @if(Session::has('gagal'))
+            <div class="alert alert-danger">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+           {{ Session::get('gagal') }}
+            
+          </div>
+        @endif
+        @if (count($errors) > 0)
+  <div class="alert alert-danger">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    <strong>Perhatikan : </strong> 
+    {!!HTML::ul($errors->all())!!}
+  </div>
+  @endif
         @if(Auth::check())
   <h5 class="text-center"><b>Sudah Masuk sebagai :</b><strong> {!!HTML::link('dashboard', Auth::user()->name)!!} </strong></h5>
   <h5 class="text-center">{!!HTML::link('auth/logout', 'Keluar', ['class'=>'btn btn-danger'])!!}</h5>
   @else
-        <form action="login" method="POST">
+        <form action="{{url("auth/login")}}" method="POST">
           <div class="form-group">
             
             {!!Form::text('username',null, ['class'=>'form-control','placeholder'=>'Username'])!!}
