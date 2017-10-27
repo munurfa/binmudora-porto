@@ -177,5 +177,18 @@ class ReportController extends Controller
        // return $pdf->stream('sarjana_penggerak.pdf');
    }
 }
+
+    public function getKontingen($id)
+    {
+         $kon_st = DB::table('kontingen')->where('kontingen.id_event','=',$id);
+
+        $kon = DB::table('kompetisi')->where('kompetisi.id','=',$id)->first();
+        $data['kon_st'] = $kon_st->get();
+        $data['kon'] = $kon;
+       // dd($data);
+       // die;
+        $data['no'] = 1;
+       return view('report.kontingen',$data);
+    }
     
 }

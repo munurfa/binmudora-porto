@@ -9,6 +9,7 @@ use DB;
 use Illuminate\Http\Request;
 use Input;
 use File;
+use Auth;
 use Validator;
 
 
@@ -25,10 +26,16 @@ class AtlitController extends Controller
     }
     public function index(Request $r)
     {
-       
        $atlit = DB::table('atlits')
                         ->join('cabangs','cabangs.id_cabang','=','atlits.cabang')
                         ->join('jeniss','jeniss.id_jenis','=','atlits.jenis');
+       
+       if (Auth::user()->cabang=="000") {
+           $atlit=$atlit;
+       } else {
+           $atlit=$atlit->where("cabang","=",Auth::user()->cabang);
+       }
+       
        
         
         $data['all_atlit'] = $atlit;
@@ -103,7 +110,6 @@ class AtlitController extends Controller
         $this->validate($r,[
             'nama'=>'required', 
             'tmp_lahir' => 'required',
-            'tgl_lahir' => 'required',
             'foto'=> 'image' ]);
         
         $atlit = Atlit::create([

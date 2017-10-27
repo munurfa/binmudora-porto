@@ -25,23 +25,24 @@ class SarprasPublicController extends Controller
     public function index(Request $r)
     {
        
-       $sarpub = DB::table('sarpras_public')->paginate(10);
+       $sarpub = DB::table('sarpras_public');
 
-        $data['sarpub'] = $sarpub;
-       $data['keyword'] = $r->keyword;
+        $data['sarpub'] = $sarpub->paginate(10);
+        $data['sarpub_all'] = $sarpub;
+        $data['keyword'] = "";
         $data['no'] = 1;
        return view('sarpub.index',$data);
     }
-      public function cari(Request $r)
+    public function cari(Request $r,$cari)
     {
        
-       $sarpub = DB::table('sarpras_public')->where('sarpras_public.nama','like',"%".$r->keyword."%")->paginate(10);
+       $sarpub = DB::table('sarpras_public')->where('sarpras_public.nama','like',"%".$cari."%");
 
-       $data['sarpub'] = $sarpub;
-      
-        $data['keyword'] = $r->keyword;
+       $data['sarpub'] = $sarpub->paginate(10);
+      $data['sarpub_all'] = $sarpub;
+        $data['keyword'] = $cari;
         $data['no'] = 1;
-       return view('sarpub.index',$data);
+       return view('sarpub.cari',$data);
     }
     /**
      * Show the form for creating a new resource.

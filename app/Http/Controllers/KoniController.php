@@ -136,12 +136,12 @@ class KoniController extends Controller
 
       public function struktur($id)
     {
-         $koni_st = DB::table('koni_struktur')->where('koni_struktur.id_koni','=',$id)
-                        ->paginate(10);
+         $koni_st = DB::table('koni_struktur')->where('koni_struktur.id_koni','=',$id);
 
         $koni = DB::table('konis')->where('konis.id','=',$id)->first();
 
-        $data['koni_st'] = $koni_st;
+        $data['koni_st'] = $koni_st->paginate(10);
+        $data['koni_st_all'] = $koni_st;
         $data['koni'] = $koni;
        // dd($data);
        // die;

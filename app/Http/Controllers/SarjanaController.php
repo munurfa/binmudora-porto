@@ -24,25 +24,25 @@ class SarjanaController extends Controller
     public function index(Request $r)
     {
        
-       $sar = DB::table('sarjana')->paginate(10);
-
-        $data['sar'] = $sar;
-
-        // $data['keyword'] = $r->keyword;
+       $sar = DB::table('sarjana');
+       $data['sar'] = $sar->paginate(10);
+        $data['sar_all'] = $sar;
+        $data['keyword'] = "";
+        
         $data['no'] = 1;
        return view('sarjana.index',$data);
     }
-    //  public function cari(Request $r)
-    // {
+          public function cari(Request $r,$cari)
+    {
        
-    //    $koni = DB::table('konis')->where('konis.nama','like',"%".$r->keyword."%")->paginate(10);
+       $sar = DB::table('sarjana')->where('sarjana.nama','like',"%".$cari."%");
 
-    //    $data['koni'] = $koni;
-      
-    //     $data['keyword'] = $r->keyword;
-    //     $data['no'] = 1;
-    //    return view('koni.index',$data);
-    // }
+       $data['sar'] = $sar->paginate(10);
+      $data['sar_all'] = $sar;
+        $data['keyword'] = $cari;
+        $data['no'] = 1;
+       return view('sarjana.cari',$data);
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -154,11 +154,11 @@ class SarjanaController extends Controller
 
     public function event($id)
     {
-         $sar_ev = DB::table('sarjana_event')->paginate(10);
+         $sar_ev = DB::table('sarjana_event');
 
         $sar = DB::table('sarjana')->where('sarjana.id_sarjana','=',$id)->first();
-
-        $data['sar_ev'] = $sar_ev;
+        $data['sar_ev_all'] = $sar_ev;
+        $data['sar_ev'] = $sar_ev->paginate(10);
         $data['sar'] = $sar;
        // dd($data);
        // die;

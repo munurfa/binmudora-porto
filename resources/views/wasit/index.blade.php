@@ -7,7 +7,8 @@
   	 <h3>Data Wasit 
   	 <a href="{{url("wasit/create")}}" class="btn btn-danger">Tambah Data</a></h3>
   	  {!!Form::open(['method'=>'get','url'=>'wasit/cari','id'=>'formcari'])!!}
-  	 	{!!Form::text('keyword', '', ['class'=>'form-control1','style'=>'margin-right:5px','placeholder'=>'Cari Berdasarkan Nama'])!!}
+  	  <label class="control-label">Cari Berdasarkan Nama lalu tekan Enter</label>
+  	 	{!!Form::text('keyword', '', ['class'=>'form-control1','style'=>'margin-right:5px','placeholder'=>'Cari Berdasarkan Nama','id'=>'cari'])!!}
   	 {{-- 
   	 	{!!Form::submit('Cari', ['class'=>'btn btn-danger'])!!} --}}
 		
@@ -25,11 +26,11 @@
   	 $(document).ready(function () {
   	 	$("#cabang").change(function() {
 		  var action =  $("#cabang").val() ;
-		  $("#formsort").attr("action", "wasit/sortby/" + action);
+		  $("#formsort").attr("action", "{!!url("atlit/sortby/")!!}"+"/"+ + action);
 		});
 		$("#cari").change(function() {
 		  var cari =  $("#cari").val() ;
-		  $("#formcari").attr("action", "wasits/cari/" + cari);
+		  $("#formcari").attr("action", "{!!url("wasit/cari/")!!}"+"/"+cari);
 		});
   	 });
   	 </script>

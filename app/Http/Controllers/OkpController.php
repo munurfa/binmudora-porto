@@ -20,11 +20,24 @@ class OkpController extends Controller
     }
     public function index()
     {
-         $okp = DB::table('okp')->paginate(10);
+         $okp = DB::table('okp');
 
-        $data['okp'] = $okp;
+        $data['okp'] = $okp->paginate(10);
+        $data['keyword'] = "";
+        $data['okp_all'] = $okp;
         $data['no'] = 1;
        return view('okp.index',$data);
+    }
+         public function cari(Request $r,$cari)
+    {
+       
+       $okp = DB::table('okp')->where('okp.nama','like',"%".$cari."%");
+
+       $data['okp'] = $okp->paginate(10);
+      $data['okp_all'] = $okp;
+        $data['keyword'] = $cari;
+        $data['no'] = 1;
+       return view('okp.cari',$data);
     }
 
     /**
@@ -126,12 +139,12 @@ class OkpController extends Controller
     }
           public function struktur($id)
     {
-         $okp_st = DB::table('okp_struktur')->where('okp_struktur.id_okp','=',$id)
-                        ->paginate(10);
+         $okp_st = DB::table('okp_struktur')->where('okp_struktur.id_okp','=',$id);
 
         $okp = DB::table('okp')->where('okp.id_okp','=',$id)->first();
 
-        $data['okp_st'] = $okp_st;
+        $data['okp_st'] = $okp_st->paginate(10);
+        $data['okp_st_all'] = $okp_st;
         $data['okp'] = $okp;
        // dd($data);
        // die;

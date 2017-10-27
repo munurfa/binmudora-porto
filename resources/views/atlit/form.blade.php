@@ -44,9 +44,9 @@
 </div>
 <div class="form-group">
 	<label for="focusedinput" class="col-sm-2 control-label">Alamat</label>
-	<div class="col-sm-8" >
+	<div class="col-sm-8" data-target="#editor">
 		
-		{!!Form::textarea('alamat', null, ["class"=>"form-control1","placeholder"=>"Masukkan Alamat","style"=>"height:100px"])!!}
+		{!!Form::textarea('alamat', null, ["class"=>"form-control1","placeholder"=>"Masukkan Alamat","style"=>"height:100px","id"=>"editor"])!!} 
 		
 	</div>
 	

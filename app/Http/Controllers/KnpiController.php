@@ -25,25 +25,26 @@ class KnpiController extends Controller
     public function index(Request $r)
     {
        
-       $knpi = DB::table('knpi')->paginate(10);
+       $knpi = DB::table('knpi');
 
-        $data['knpi'] = $knpi;
-
+        $data['knpi'] = $knpi->paginate(10);
+        $data['knpi_all'] = $knpi;
+        $data['keyword'] = "";
         // $data['keyword'] = $r->keyword;
         $data['no'] = 1;
        return view('knpi.index',$data);
     }
-    //  public function cari(Request $r)
-    // {
+         public function cari(Request $r,$cari)
+    {
        
-    //    $koni = DB::table('konis')->where('konis.nama','like',"%".$r->keyword."%")->paginate(10);
+       $knpi = DB::table('knpi')->where('knpi.nama','like',"%".$cari."%");
 
-    //    $data['koni'] = $koni;
-      
-    //     $data['keyword'] = $r->keyword;
-    //     $data['no'] = 1;
-    //    return view('koni.index',$data);
-    // }
+       $data['knpi'] = $knpi->paginate(10);
+      $data['knpi_all'] = $knpi;
+        $data['keyword'] = $cari;
+        $data['no'] = 1;
+       return view('knpi.cari',$data);
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -135,12 +136,11 @@ class KnpiController extends Controller
 
       public function struktur($id)
     {
-         $knpi_st = DB::table('knpi_struktur')->where('knpi_struktur.id_knpi','=',$id)
-                        ->paginate(10);
+        $knpi_st = DB::table('knpi_struktur')->where('knpi_struktur.id_knpi','=',$id);
 
         $knpi = DB::table('knpi')->where('knpi.id_knpi','=',$id)->first();
-
-        $data['knpi_st'] = $knpi_st;
+        $data['knpi_st'] = $knpi_st->paginate(10);
+        $data['knpi_st_all'] = $knpi_st;
         $data['knpi'] = $knpi;
        // dd($data);
        // die;

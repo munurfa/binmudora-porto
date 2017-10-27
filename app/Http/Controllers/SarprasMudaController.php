@@ -25,24 +25,24 @@ class SarprasMudaController extends Controller
     public function index(Request $r)
     {
        
-       $sarmud = DB::table('sarpras_muda')->paginate(10);
+       $sarmud = DB::table('sarpras_muda');
 
-        $data['sarmud'] = $sarmud;
-        $data['keyword'] = $r->keyword;
-       
+        $data['sarmud'] = $sarmud->paginate(10);
+      $data['sarmud_all'] = $sarmud;
+        $data['keyword'] = "";
         $data['no'] = 1;
        return view('sarmud.index',$data);
     }
-     public function cari(Request $r)
+     public function cari(Request $r,$cari)
     {
        
-       $sarmud = DB::table('sarpras_muda')->where('sarpras_muda.nama','like',"%".$r->keyword."%")->paginate(10);
+       $sarmud = DB::table('sarpras_muda')->where('sarpras_muda.nama','like',"%".$cari."%");
 
-       $data['sarmud'] = $sarmud;
-      
-        $data['keyword'] = $r->keyword;
+       $data['sarmud'] = $sarmud->paginate(10);
+      $data['sarmud_all'] = $sarmud;
+        $data['keyword'] = $cari;
         $data['no'] = 1;
-       return view('sarmud.index',$data);
+       return view('sarmud.cari',$data);
     }
     /**
      * Show the form for creating a new resource.

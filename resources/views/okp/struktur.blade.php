@@ -19,7 +19,7 @@
 			
   	 <h5 style="color: black">
 					
-					( {{$okp_st->count() }} Data Ditemukan)
+					( {{$okp_st_all->count() }} Data Ditemukan)
 				</h5>
 					<table class="table table-striped table-responsive table-bordered text-center">
 						<thead>

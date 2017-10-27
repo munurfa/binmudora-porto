@@ -25,24 +25,25 @@ class SarprasAssetController extends Controller
     public function index(Request $r)
     {
        
-       $sarass = DB::table('sarpras_asset')->paginate(10);
+       $sarass = DB::table('sarpras_asset');
 
-        $data['sarass'] = $sarass;
-        $data['keyword'] = $r->keyword;
+        $data['sarass'] = $sarass->paginate(10);
+      $data['sarass_all'] = $sarass;
+        $data['keyword'] = "";
        
         $data['no'] = 1;
        return view('sarass.index',$data);
     }
-         public function cari(Request $r)
+   public function cari(Request $r,$cari)
     {
        
-       $sarass = DB::table('sarpras_asset')->where('sarpras_asset.nama','like',"%".$r->keyword."%")->paginate(10);
+       $sarass = DB::table('sarpras_asset')->where('sarpras_asset.nama','like',"%".$cari."%");
 
-       $data['sarass'] = $sarass;
-      
-        $data['keyword'] = $r->keyword;
+       $data['sarass'] = $sarass->paginate(10);
+      $data['sarass_all'] = $sarass;
+        $data['keyword'] = $cari;
         $data['no'] = 1;
-       return view('sarass.index',$data);
+       return view('sarass.cari',$data);
     }
     /**
      * Show the form for creating a new resource.

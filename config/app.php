@@ -145,7 +145,12 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
          Illuminate\Html\HtmlServiceProvider::class,
-         Maatwebsite\Excel\ExcelServiceProvider::class
+         Maatwebsite\Excel\ExcelServiceProvider::class,
+    //       Unisharp\Laravelfilemanager\LaravelFilemanagerServiceProvider::class,
+    // Intervention\Image\ImageServiceProvider::class,
+
+
+        
 
     ],
 
@@ -198,7 +203,7 @@ return [
               'Form'      => Illuminate\Html\FormFacade::class,
         'HTML'      => Illuminate\Html\HtmlFacade::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
-
+        // 'Image' => Intervention\Image\Facades\Image::class,
     ],
 
 ];

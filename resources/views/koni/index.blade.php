@@ -17,7 +17,7 @@
 
 		$("#cari").change(function() {
 		  var cari =  $("#cari").val() ;
-		  $("#formcari").attr("action", "koni/cari/" + cari);
+		  $("#formcari").attr("action", "{!!url("koni/cari/")!!}"+"/"+ cari);
 		});
   	 })
   	 </script>

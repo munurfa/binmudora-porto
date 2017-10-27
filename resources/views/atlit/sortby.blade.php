@@ -21,7 +21,7 @@
 
 				<div class="panel-body no-padding">
 				
-				 {!!Form::open(['url'=>'001','id'=>'formsort','method'=>'get'])!!}
+				 {!!Form::open(['url'=>'atlit/sortby','id'=>'formsort','method'=>'get'])!!}
 				 <h5>Sort By Cabang</h5>
   	 	{!!Form::select('cabang', $cabang, $sort, ['class' => 'form-control1 col-md-6','style'=>'width:40%;margin-right:5px','id'=>'cabang'])!!}
 		
@@ -31,10 +31,10 @@
   		 <script>
 
   	 $(document).ready(function () {
-  	 	var action =  $("#cabang").val() ;
+  	 	
   	 	$("#cabang").change(function() {
 		  var action =  $("#cabang").val() ;
-		  $("#formsort").attr("action",  action);
+		  $("#formsort").attr("action", "{!!url("atlit/sortby/")!!}"+"/" + action);
 		});
 		// $("#cari").change(function() {
 		//   var cari =  $("#cari").val() ;

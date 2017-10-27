@@ -8,11 +8,9 @@
   	 <a href="{{url("atlit/create")}}" class="btn btn-danger">Tambah Data</a></h3>
  
 
-  	 {!!Form::open(['method'=>'get','url'=>'atlit/cari','id'=>'formcari'])!!}
+  	 {!!Form::open(['method'=>'get','url'=>'atlit/cari/','id'=>'formcari'])!!}
+  	 	<label class="control-label">Cari Berdasarkan Nama lalu tekan Enter</label>
   	 	{!!Form::text('keyword', '', ['class'=>'form-control1','style'=>'margin-right:5px','placeholder'=>'Cari Berdasarkan Nama','id'=>'cari'])!!}
-  	 
-		{{-- 
-  	 	{!!Form::submit('Cari', ['class'=>'btn btn-danger'])!!} --}}
   	 {!!Form::close()!!}
 
 
@@ -20,8 +18,8 @@
   	 <div class="panel panel-warning" data-widget="{&quot;draggable&quot;: &quot;false&quot;}" data-widget-static="">
 
 				<div class="panel-body no-padding">
-				
-				 {!!Form::open(['url'=>'sortby/001','id'=>'formsort','method'=>'get'])!!}
+ @if(Auth::user()->cabang=="000")				
+				 {!!Form::open(['url'=>'atlit/sortby/001','id'=>'formsort','method'=>'get'])!!}
 				 <h5>Sort By Cabang</h5>
   	 	{!!Form::select('cabang', $cabang, null, ['class' => 'form-control1 col-md-6','style'=>'width:40%;margin-right:5px','id'=>'cabang'])!!}
 		
@@ -33,17 +31,16 @@
   	 $(document).ready(function () {
   	 	$("#cabang").change(function() {
 		  var action =  $("#cabang").val() ;
-		  $("#formsort").attr("action", "atlit/sortby/" + action);
+		  $("#formsort").attr("action", "{!!url("atlit/sortby/")!!}"+"/" + action);
 		});
 		$("#cari").change(function() {
+		
 		  var cari =  $("#cari").val() ;
-		  $("#formcari").attr("action", "atlit/cari/" + cari);
+		  $("#formcari").attr("action", "{!!url("atlit/cari/")!!}"+"/"+cari);
 		});
   	 })
-		
-
-
   	 </script>
+	   @endif
   	 <h5 style="color: black">
 					@if($keyword!="")
 						Pencarian dengan Keyword "{{$keyword}}"

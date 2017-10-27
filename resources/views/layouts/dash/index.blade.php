@@ -4,8 +4,7 @@
 		<title>@yield('title') | Dashboard</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<meta name="keywords" content="Modern Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template,
-		Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+		
 		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 		<!-- Bootstrap Core CSS -->
 		<link href="{{asset("css/bootstrap-3.1.1.min.css")}}" rel='stylesheet' />
@@ -18,6 +17,9 @@
 		<!-- jQuery -->
 		<script src="{{asset("js/jquery.min.js")}}"></script>
 		<script src="{{asset("js/jquery-ui.js")}}"></script>
+		<script src="{{asset("js/tinymce.min.js")}}"></script>
+
+
 		<!--webfonts-->
 
     	<link rel="shortcut icon" href="{{ asset('images/logo.png') }}">
@@ -64,5 +66,19 @@
 
 );
 </script>
+<script type="text/javascript">
+   tinymce.init({
+  selector     : "textarea",
+  plugins      : ["advlist autolink lists link image charmap print preview anchor", "searchreplace visualblocks code fullscreen", "insertdatetime media table contextmenu paste responsivefilemanager"],
+  toolbar      : "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image responsivefilemanager",
+  image_advtab : true,
+  relative_urls: false, 
+  
+  external_filemanager_path:"{!! str_finish(asset('/filemanager'),'/') !!}",
+  filemanager_title        :"Responsive File Manager" , // bisa diganti terserah anda
+  external_plugins         : { "filemanager" : "{{ asset('/filemanager/plugin.min.js') }}"} 
+   }); 
+</script>
+
 </body>
 </html>

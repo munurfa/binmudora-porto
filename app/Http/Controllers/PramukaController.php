@@ -24,25 +24,25 @@ class PramukaController extends Controller
     public function index(Request $r)
     {
        
-       $pra = DB::table('pramuka')->paginate(10);
+       $pra = DB::table('pramuka');
 
-        $data['pra'] = $pra;
-
-        // $data['keyword'] = $r->keyword;
+        $data['pra'] = $pra->paginate(10);
+      $data['pra_all'] = $pra;
+      $data['keyword'] = "";
         $data['no'] = 1;
        return view('pramuka.index',$data);
     }
-    //  public function cari(Request $r)
-    // {
+       public function cari(Request $r,$cari)
+    {
        
-    //    $koni = DB::table('konis')->where('konis.nama','like',"%".$r->keyword."%")->paginate(10);
+       $pra = DB::table('pramuka')->where('pramuka.nama','like',"%".$cari."%");
 
-    //    $data['koni'] = $koni;
-      
-    //     $data['keyword'] = $r->keyword;
-    //     $data['no'] = 1;
-    //    return view('koni.index',$data);
-    // }
+       $data['pra'] = $pra->paginate(10);
+      $data['pra_all'] = $pra;
+        $data['keyword'] = $cari;
+        $data['no'] = 1;
+       return view('pramuka.cari',$data);
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -149,12 +149,11 @@ class PramukaController extends Controller
 
       public function struktur($id)
     {
-         $pra_st = DB::table('pramuka_struktur')->where('pramuka_struktur.id_pramuka','=',$id)
-                        ->paginate(10);
+         $pra_st = DB::table('pramuka_struktur')->where('pramuka_struktur.id_pramuka','=',$id);
 
         $pra = DB::table('pramuka')->where('pramuka.id_pramuka','=',$id)->first();
-
-        $data['pra_st'] = $pra_st;
+        $data['pra_st_all'] = $pra_st;
+        $data['pra_st'] = $pra_st->paginate(10);
         $data['pra'] = $pra;
        // dd($data);
        // die;

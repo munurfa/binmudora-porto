@@ -1,10 +1,17 @@
 
 <?php
 
+
 Route::get('/', function ()
 {
-	return redirect()->intended('auth/login');
+	return view("welcome");
 });
+
+
+Route::resource('artikel', 'ArtikelController',['except'=>'show']);
+Route::get('artikel/cari/{cari}','ArtikelController@cari');
+
+
 Route::get('auth/login', 'LogController@getLogin');
 Route::post('auth/login', 'LogController@postLogin');
 Route::get('auth/logout', 'LogController@postLogout');
@@ -78,24 +85,33 @@ Route::patch('koni/struktur/{id}','KoniController@strukturUpdate');
 Route::delete('koni/struktur/{id}','KoniController@strukturDelete');
 
 Route::resource('sarana/keolahragaan', 'SarprasORController',['except'=>'show']);
-Route::post('sarana/keolahragaan/cari','SarprasORController@cari');
+Route::get('sarana/keolahragaan/cari/{cari}','SarprasORController@cari');
 
 Route::resource('sarana/kepemudaan', 'SarprasMudaController',['except'=>'show']);
-Route::post('sarana/kepemudaan/cari','SarprasMudaController@cari');
+Route::get('sarana/kepemudaan/cari/{cari}','SarprasMudaController@cari');
 
 Route::resource('sarana/public', 'SarprasPublicController',['except'=>'show']);
-Route::post('sarana/public/cari','SarprasPublicController@cari');
+Route::get('sarana/public/cari/{cari}','SarprasPublicController@cari');
 
 Route::resource('sarana/asset', 'SarprasAssetController',['except'=>'show']);
-Route::post('sarana/asset/cari','SarprasAssetController@cari');
+Route::get('sarana/asset/cari/{cari}','SarprasAssetController@cari');
 
 Route::resource('event', 'KompetisiController',['except'=>'show']);
-Route::post('event/cari','KompetisiController@cari');
+Route::get('event/cari/{cari}','KompetisiController@cari');
+Route::get('event/kontingen/{id}','KompetisiController@struktur');
+Route::get('event/kontingen/{id}/create','KompetisiController@strukturCreate');
+Route::post('event/kontingen','KompetisiController@strukturStore');
+Route::get('event/kontingen/{id}/edit','KompetisiController@strukturEdit');
+Route::patch('event/kontingen/{id}','KompetisiController@strukturUpdate');
+Route::delete('event/kontingen/{id}','KompetisiController@strukturDelete');
+Route::get('event/kontingen/{idkom}/card/{id}','KompetisiController@printCard');
+
+Route::get('report/event/{id}/kontingen', 'ReportController@getKontingen');
+Route::get('report/event/{id}/kontingen/printex', 'ExportController@getKontingen');
 
 Route::get('report/olahraga', 'ReportController@setOR');
 Route::post('report/olahraga', 'ReportController@getOR');
 Route::get('report/olahraga/{pilih}/{cabang}', 'ExportController@getOREx');
-
 
 Route::get('report/sarana', 'ReportController@setSarana');
 Route::post('report/sarana', 'ReportController@getSarana');
@@ -106,6 +122,7 @@ Route::post('report/kepemudaan', 'ReportController@getMuda');
 Route::get('report/kepemudaan/{pilih}', 'ExportController@getMudaEx');
 
 Route::resource('okp', 'OkpController',['except'=>'show']);
+Route::get('okp/cari/{cari}','OkpController@cari');
 Route::get('okp/struktur/{id}','OkpController@struktur');
 Route::get('okp/struktur/{id}/create','OkpController@strukturCreate');
 Route::post('okp/struktur','OkpController@strukturStore');
@@ -114,6 +131,7 @@ Route::patch('okp/struktur/{id}','OkpController@strukturUpdate');
 Route::delete('okp/struktur/{id}','OkpController@strukturDelete');
 
 Route::resource('knpi', 'KnpiController',['except'=>'show']);
+Route::get('knpi/cari/{cari}','KnpiController@cari');
 Route::get('knpi/struktur/{id}','KnpiController@struktur');
 Route::get('knpi/struktur/{id}/create','KnpiController@strukturCreate');
 Route::post('knpi/struktur','KnpiController@strukturStore');
@@ -122,6 +140,7 @@ Route::patch('knpi/struktur/{id}','KnpiController@strukturUpdate');
 Route::delete('knpi/struktur/{id}','KnpiController@strukturDelete');
 
 Route::resource('sp', 'SarjanaController',['except'=>'show']);
+Route::get('sp/cari/{cari}','SarjanaController@cari');
 Route::get('sp/event/{id}','SarjanaController@event');
 Route::get('sp/event/{id}/create','SarjanaController@eventCreate');
 Route::post('sp/event','SarjanaController@eventStore');
@@ -130,9 +149,49 @@ Route::patch('sp/event/{id}','SarjanaController@eventUpdate');
 Route::delete('sp/event/{id}','SarjanaController@eventDelete');
 
 Route::resource('kepanduan', 'PramukaController',['except'=>'show']);
+Route::get('kepanduan/cari/{cari}','PramukaController@cari');
 Route::get('kepanduan/struktur/{id}','PramukaController@struktur');
 Route::get('kepanduan/struktur/{id}/create','PramukaController@strukturCreate');
 Route::post('kepanduan/struktur','PramukaController@strukturStore');
 Route::get('kepanduan/struktur/{id}/edit','PramukaController@strukturEdit');
 Route::patch('kepanduan/struktur/{id}','PramukaController@strukturUpdate');
 Route::delete('kepanduan/struktur/{id}','PramukaController@strukturDelete');
+
+Route::resource('wirausahabidang', 'KUController',['except'=>'show']);
+Route::get('wirausahabidang/cari/{cari}','KUController@cari');
+Route::get('wirausaha/struktur/{id}/cari/{cari}','KUController@cariUsaha');
+Route::get('wirausaha/struktur/{id}','KUController@struktur');
+Route::get('wirausaha/struktur/{id}/create','KUController@strukturCreate');
+Route::post('wirausaha/struktur','KUController@strukturStore');
+Route::get('wirausaha/struktur/{id}/edit','KUController@strukturEdit');
+Route::patch('wirausaha/struktur/{id}','KUController@strukturUpdate');
+Route::delete('wirausaha/struktur/{id}','KUController@strukturDelete');
+
+Route::resource('paskibraka', 'PaskibController',['except'=>'show']);
+Route::get('paskibraka/cari/{cari}','PaskibController@cari');
+
+Route::resource('kpn', 'KpnController',['except'=>'show']);
+Route::get('kpn/cari/{cari}','KpnController@cari');
+
+Route::resource('pelopor', 'PeloporController',['except'=>'show']);
+Route::get('pelopor/cari/{cari}','PeloporController@cari');
+
+Route::resource('jpi', 'JpiController',['except'=>'show']);
+Route::get('jpi/cari/{cari}','JpiController@cari');
+
+Route::resource('bpap', 'BaktiController',['except'=>'show']);
+Route::get('bpap/cari/{cari}','BaktiController@cari');
+
+Route::resource('ppan', 'PpanController',['except'=>'show']);
+Route::get('ppan/cari/{cari}','PpanController@cari');
+
+Route::resource('eventkepemudaan', 'EventMudaController',['except'=>'show']);
+Route::get('eventkepemudaan/cari/{cari}','EventMudaController@cari');
+Route::get('eventkepemudaan/peserta/{id}/cari/{cari}','EventMudaController@cariPeserta');
+Route::get('eventkepemudaan/peserta/{id}','EventMudaController@struktur');
+Route::get('eventkepemudaan/peserta/{id}/create','EventMudaController@strukturCreate');
+Route::post('eventkepemudaan/peserta','EventMudaController@strukturStore');
+Route::get('eventkepemudaan/peserta/{id}/edit','EventMudaController@strukturEdit');
+Route::patch('eventkepemudaan/peserta/{id}','EventMudaController@strukturUpdate');
+Route::delete('eventkepemudaan/peserta/{id}','EventMudaController@strukturDelete');
+

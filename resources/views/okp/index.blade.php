@@ -6,32 +6,36 @@
 	   <div class="xs">
   	 <h3>Data Organisasi Kepemudaan 
   	 <a href="{{url("okp/create")}}" class="btn btn-danger">Tambah Data</a></h3>
- 
-
-{{--   	 {!!Form::open(['url'=>'atlit/cari'])!!}
-  	 	{!!Form::text('keyword', '', ['class'=>'form-control1 col-md-5','style'=>'width:40%;margin-right:5px','placeholder'=>'Cari Berdasarkan Nama'])!!}
-  	 
-		
-  	 	{!!Form::submit('Cari', ['class'=>'btn btn-danger'])!!}
+   	 {!!Form::open(['method'=>'get','url'=>'okp/cari','id'=>'formcari'])!!}
+   	 <label class="control-label">Cari Berdasarkan Nama lalu tekan Enter</label>
+  	 	{!!Form::text('keyword', '', ['class'=>'form-control1','style'=>'margin-right:5px','placeholder'=>'Cari Berdasarkan Nama','id'=>'cari'])!!}
+  
   	 {!!Form::close()!!}
- --}}
+  	   		 <script>
+
+  	 $(document).ready(function () {
+
+		$("#cari").change(function() {
+		  var cari =  $("#cari").val() ;
+		  $("#formcari").attr("action","{!!url("okp/cari/")!!}"+"/"+cari);
+		});
+  	 })
+		
+
+
+  	 </script>
 
 
   	 <div class="panel panel-warning" data-widget="{&quot;draggable&quot;: &quot;false&quot;}" data-widget-static="">
 
 				<div class="panel-body no-padding">
 				
-		{{-- 		 {!!Form::open(['url'=>'atlit/sortby'])!!}
-				 <h5>Sort By Cabang</h5>
-  	 	{!!Form::select('cabang', $cabang, null, ['class' => 'form-control1 col-md-6','style'=>'width:40%;margin-right:5px'])!!}
-		
-  	 	{!!Form::submit('Kelompokkan', ['class'=>'btn btn-danger'])!!}
-  	 {!!Form::close()!!}<br> --}}
+	
   	 <h5 style="color: black">
-					{{--@if($keyword!="")
+				@if($keyword!="")
 						Pencarian dengan Keyword "{{$keyword}}"
-					@endif--}}
-					( {{$okp->count() }} Data Ditemukan)
+					@endif
+					( {{$okp_all->count() }} Data Ditemukan)
 				</h5>
 					<table class="table table-striped table-responsive table-bordered text-center">
 						<thead>

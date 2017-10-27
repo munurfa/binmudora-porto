@@ -9,10 +9,9 @@
  
 
   	 {!!Form::open(['method'=>'get','url'=>'atlit/cari','id'=>'formcari'])!!}
+  	 <label class="control-label">Cari Berdasarkan Nama lalu tekan Enter</label>
   	 	{!!Form::text('keyword', '', ['class'=>'form-control1','style'=>'margin-right:5px','placeholder'=>'Cari Berdasarkan Nama','id'=>'cari'])!!}
-  	 
-		{{-- 
-  	 	{!!Form::submit('Cari', ['class'=>'btn btn-danger','id'=>'tmbCari'])!!} --}}
+  
   	 {!!Form::close()!!}
 
 
@@ -37,7 +36,7 @@
 		// });
 		$("#cari").change(function() {
 		  var cari =  $("#cari").val() ;
-		  $("#formcari").attr("action", cari);
+		  $("#formcari").attr("action", "{!!url("atlit/cari/")!!}"+"/"+cari);
 		});
   	 })
 		

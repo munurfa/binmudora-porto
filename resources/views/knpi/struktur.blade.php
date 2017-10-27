@@ -1,5 +1,5 @@
 @extends('layouts.dash.index')
-@section('title','Struktur KNpi')
+@section('title','Struktur Knpi')
 @section('main')
 
 	<div class="col-md-12 graphs">
@@ -19,7 +19,7 @@
 			
   	 <h5 style="color: black">
 					
-					( {{$knpi_st->count() }} Data Ditemukan)
+					( {{$knpi_st_all->count() }} Data Ditemukan)
 				</h5>
 					<table class="table table-striped table-responsive table-bordered text-center">
 						<thead>

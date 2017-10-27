@@ -5,6 +5,7 @@
 	<div class="xs">
 		<h3>Data Pelatih 
 		<a href="{{url("pelatih/create")}}" class="btn btn-danger">Tambah Data</a></h3>
+		<label class="control-label">Cari Berdasarkan Nama lalu tekan Enter</label>
 		 {!!Form::open(['method'=>'get','url'=>'pelatih/cari','id'=>'formcari'])!!}
   	 	{!!Form::text('keyword', '', ['class'=>'form-control1','style'=>'margin-right:5px','placeholder'=>'Cari Berdasarkan Nama','id'=>'cari'])!!}
   	 
@@ -29,7 +30,7 @@
 		// });
 		$("#cari").change(function() {
 		  var cari =  $("#cari").val() ;
-		  $("#formcari").attr("action", cari);
+		  $("#formcari").attr("action", "{!!url("pelatih/cari/")!!}"+"/"+cari);
 		});
   	 })
 		

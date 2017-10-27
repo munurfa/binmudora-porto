@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Excel;
@@ -30,16 +29,16 @@ class ExportController extends Controller
             
                      
         $no = 1; 
-            
-        ob_end_clean();
-        ob_start();        
+              ob_end_clean();
+        ob_start();
+               
         Excel::create('Report Atlit', function($excel) use($atlit_pres,$no)  {
-        	$excel->sheet('New sheet', function($sheet)use($atlit_pres,$no)  {
+          $excel->sheet('New sheet', function($sheet)use($atlit_pres,$no)  {
 
-		        $sheet->loadView('excel.atlit')->with('atlit_pres',$atlit_pres)->with('no',$no);
-		    });
+            $sheet->loadView('excel.atlit')->with('atlit_pres',$atlit_pres)->with('no',$no);
+        });
   
-		})->export('xls');
+    })->export('xls');
          }elseif ($pilih == "pelatih") {
 
               if ($cabang != "000") {
@@ -53,9 +52,9 @@ class ExportController extends Controller
             
                      
         $no = 1; 
-            
-        ob_end_clean();
-ob_start();        
+              ob_end_clean();
+        ob_start();
+               
         Excel::create('Report Pelatih', function($excel) use($pelatih_se,$no)  {
           $excel->sheet('New sheet', function($sheet)use($pelatih_se,$no)  {
 
@@ -75,9 +74,9 @@ ob_start();
                          ->join('cabangs','cabangs.id_cabang','=','wasits.cabang')->get();
             }
             $no = 1; 
-            
-                ob_end_clean();
-        ob_start();        
+              ob_end_clean();
+        ob_start();
+                       
                 Excel::create('Report Wasit', function($excel) use($wasit_se,$no)  {
                   $excel->sheet('New sheet', function($sheet)use($wasit_se,$no)  {
 
@@ -97,7 +96,8 @@ ob_start();
         $okp = DB::table('okp')->get();
         $no = 1;
         ob_end_clean();
-        ob_start();        
+        ob_start();
+               
                 Excel::create('Report OKP', function($excel) use($okp,$no)  {
                   $excel->sheet('New sheet', function($sheet)use($okp,$no)  {
 
@@ -108,8 +108,8 @@ ob_start();
       } elseif($pilih == "knpi"){
         $knpi = DB::table('knpi')->get();
         $no = 1;
-        ob_end_clean();
-        ob_start();        
+                ob_end_clean();
+        ob_start();
                 Excel::create('Report KNPI', function($excel) use($knpi,$no)  {
                   $excel->sheet('New sheet', function($sheet)use($knpi,$no)  {
 
@@ -121,8 +121,8 @@ ob_start();
 
         $pra = DB::table('pramuka')->get();
         $no = 1;
-        ob_end_clean();
-        ob_start();        
+                ob_end_clean();
+        ob_start();
                 Excel::create('Report Kepramukaan', function($excel) use($pra,$no)  {
                   $excel->sheet('New sheet', function($sheet)use($pra,$no)  {
 
@@ -135,8 +135,8 @@ ob_start();
 
         $sar = DB::table('sarjana')->get();
         $no = 1;
-        ob_end_clean();
-        ob_start();        
+                ob_end_clean();
+        ob_start();
                 Excel::create('Report Sarjana Penggerak', function($excel) use($sar,$no)  {
                   $excel->sheet('New sheet', function($sheet)use($sar,$no)  {
 
@@ -153,8 +153,8 @@ ob_start();
       if ($pilih == "sarpras_muda") {
         $sarmud = DB::table('sarpras_muda')->get();
         $no = 1;
-        ob_end_clean();
-        ob_start();        
+                 ob_end_clean();
+        ob_start();
                 Excel::create('Report Sarana Kepemudaan', function($excel) use($sarmud,$no)  {
                   $excel->sheet('New sheet', function($sheet)use($sarmud,$no)  {
 
@@ -165,8 +165,8 @@ ob_start();
       } elseif($pilih == "sarpras_ors"){
         $sor = DB::table('sarpras_ors')->get();
         $no = 1;
-        ob_end_clean();
-        ob_start();        
+                 ob_end_clean();
+        ob_start();
                 Excel::create('Report Sarana Keolahragaan', function($excel) use($sor,$no)  {
                   $excel->sheet('New sheet', function($sheet)use($sor,$no)  {
 
@@ -178,8 +178,8 @@ ob_start();
       }elseif($pilih == "sarpras_public"){
         $sarpub = DB::table('sarpras_public')->get();
         $no = 1;
-        ob_end_clean();
-        ob_start();        
+                 ob_end_clean();
+        ob_start();
                 Excel::create('Report Sarana Public', function($excel) use($sarpub,$no)  {
                   $excel->sheet('New sheet', function($sheet)use($sarpub,$no)  {
 
@@ -191,8 +191,8 @@ ob_start();
       }elseif($pilih == "sarpras_asset"){
 $saras = DB::table('sarpras_asset')->get();
         $no = 1;
-        ob_end_clean();
-        ob_start();        
+                 ob_end_clean();
+        ob_start();
                 Excel::create('Report Sarana Asset', function($excel) use($saras,$no)  {
                   $excel->sheet('New sheet', function($sheet)use($saras,$no)  {
 
@@ -205,5 +205,18 @@ $saras = DB::table('sarpras_asset')->get();
 
 
     }
+public function getKontingen($id)
+    {
+       $kon_st = DB::table('kontingen')->where('kontingen.id_event','=',$id)->get();
+        $no = 1;
+        ob_end_clean();
+        ob_start();
+                Excel::create('Report Kontingen', function($excel) use($kon_st,$no)  {
+                  $excel->sheet('New sheet', function($sheet)use($kon_st,$no)  {
 
+                    $sheet->loadView('excel.kontingen')->with('kon_st',$kon_st)->with('no',$no);
+                });
+          
+            })->export('xls');
+    }
 }

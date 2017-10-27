@@ -18,7 +18,7 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="{{asset("css/login.css")}}">
     <link rel="shortcut icon" href="{{ asset('images/logo.png') }}">
-   
+
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -29,20 +29,20 @@
   </head>
   <body class="hold-transition login-page">
     <div class="login-box">
-     
+
       <div class="login-box-body">
         <h2 class="text-center"><b>Binmudora Pemalang</b></h2>
         @if(Session::has('gagal'))
             <div class="alert alert-danger">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
            {{ Session::get('gagal') }}
-            
+
           </div>
         @endif
         @if (count($errors) > 0)
   <div class="alert alert-danger">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    <strong>Perhatikan : </strong> 
+    <strong>Perhatikan : </strong>
     {!!HTML::ul($errors->all())!!}
   </div>
   @endif
@@ -52,22 +52,23 @@
   @else
         <form action="{{url("auth/login")}}" method="POST">
           <div class="form-group">
-            
+
             {!!Form::text('username',null, ['class'=>'form-control','placeholder'=>'Username'])!!}
           </div>
           <div class="form-group">
-            
+
             {!!Form::password('password', ['class'=>'form-control','placeholder'=>'Password'])!!}
           </div>
           <div class="row">
-           
+
             <div class="col-xs-4">
-             
+
               {!!Form::submit('Masuk', ['class'=>'btn btn-primary btn-block btn-flat'])!!}
             </div><!-- /.col -->
           </div>
           {{ csrf_field() }}
           <input type="hidden" name="_token" value="{{csrf_token()}}"/>
+          
         </form>
 @endif
 

@@ -25,23 +25,24 @@ class SarprasORController extends Controller
     public function index(Request $r)
     {
        
-       $sor = DB::table('sarpras_ors')->paginate(10);
+       $sor = DB::table('sarpras_ors');
 
-        $data['sor'] = $sor;
-        $data['keyword'] = $r->keyword;
+         $data['sor'] = $sor->paginate(10);
+      $data['sor_all'] = $sor;
+        $data['keyword'] = "";
         $data['no'] = 1;
        return view('sor.index',$data);
     }
-     public function cari(Request $r)
+      public function cari(Request $r,$cari)
     {
        
-       $sor = DB::table('sarpras_ors')->where('sarpras_ors.nama','like',"%".$r->keyword."%")->paginate(10);
+       $sor = DB::table('sarpras_ors')->where('sarpras_ors.nama','like',"%".$cari."%");
 
-       $data['sor'] = $sor;
-      
-        $data['keyword'] = $r->keyword;
+       $data['sor'] = $sor->paginate(10);
+      $data['sor_all'] = $sor;
+        $data['keyword'] = $cari;
         $data['no'] = 1;
-       return view('sor.index',$data);
+       return view('sor.cari',$data);
     }
     /**
      * Show the form for creating a new resource.

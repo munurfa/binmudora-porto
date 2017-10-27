@@ -16,7 +16,15 @@
 	        	</li>
 	        		
 			    <li class="dropdown">
-	        		<a  class="dropdown-toggle" style="color: white"><i class="fa fa-user"></i> {{Auth::user()->name}}</a>
+                    <a  class="dropdown-toggle" style="color: white"><i class="fa fa-user"></i> {{Auth::user()->name}} | 
+                    <?php if (Auth::user()->cabang=="000") {
+                        echo "admin";
+                    } else {
+                        $data=DB::table('cabangs')->where("id_cabang","=",Auth::user()->cabang)->first();
+                        echo $data->nama_cab;
+                    }
+                    
+                    ?></a>
 	        		
 	      		</li>
 			</ul>
